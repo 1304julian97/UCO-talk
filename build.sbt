@@ -1,5 +1,5 @@
 // Scala version.
-ThisBuild / scalaVersion := "3.3.4"
+ThisBuild / scalaVersion := "3.8.4"
 
 // Organization
 ThisBuild / organization := "co.edu.uco"
