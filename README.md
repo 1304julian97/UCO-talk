@@ -1,12 +1,11 @@
 # UCO-talk
 
-A minimal bank DSL in Scala 3 for account and transfer
-operations, built on Cats Effect (`IO`).
+- A minimal internal bank DSL in Scala 3
 
 ## Modules
 
-- `modules/domain` — domain model and DSL algebras.
-- `modules/server` — runnable entry point (`Main`).
+- `modules/core` - the DSL: semantic model (`bank.models`), fluent syntax (`bank.dsl`), interpreter (`bank.interpreter`)
+- `modules/server` - a runnable `Main` demo.
 
 ## Development
 
@@ -18,4 +17,4 @@ sbt scalafmtCheckAll  # verify formatting (as CI does)
 sbt server/run        # run the server module
 ```
 
-Requires JDK 21 and sbt.
+Requires JDK 21 and sbt
