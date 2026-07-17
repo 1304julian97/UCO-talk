@@ -1,7 +1,7 @@
 # UCO-talk
 
-A minimal bank DSL in Scala 2.13, using tagless-final algebras over an immutable domain model, with
-Cats Effect and fs2.
+A minimal bank DSL in Scala 3 for account and transfer
+operations, built on Cats Effect (`IO`).
 
 ## Modules
 

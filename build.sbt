@@ -1,5 +1,5 @@
 // Scala version.
-ThisBuild / scalaVersion := "2.13.18"
+ThisBuild / scalaVersion := "3.3.4"
 
 // Organization
 ThisBuild / organization := "co.edu.uco"
@@ -13,7 +13,7 @@ val http4sVersion = "0.23.34"
 // Common settings.
 lazy val commonSettings = Seq(
   // Ensure we publish an artifact linked to the appropriate Java std library.
-  scalacOptions += "-release:21",
+  scalacOptions += "-java-output-version:21",
   // Make all warnings verbose.
   scalacOptions += "-Wconf:any:verbose",
   // Base dependencies.
@@ -53,3 +53,6 @@ lazy val root =
       domain,
       server
     )
+
+// Format check, compile, and test in one step.
+addCommandAlias("validate", "scalafmtCheckAll; compile; test")
