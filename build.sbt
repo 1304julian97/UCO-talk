@@ -53,3 +53,6 @@ lazy val root =
       domain,
       server
     )
+
+// Format check, compile, and test in one step.
+addCommandAlias("validate", "scalafmtCheckAll; compile; test")
