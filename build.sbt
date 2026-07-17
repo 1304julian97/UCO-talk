@@ -1,5 +1,5 @@
 // Scala version.
-ThisBuild / scalaVersion := "3.8.4"
+ThisBuild / scalaVersion := "2.13.18"
 
 // Organization
 ThisBuild / organization := "co.edu.uco"
@@ -13,7 +13,7 @@ val http4sVersion = "0.23.34"
 // Common settings.
 lazy val commonSettings = Seq(
   // Ensure we publish an artifact linked to the appropriate Java std library.
-  scalacOptions += "-java-output-version:21",
+  scalacOptions += "-release:21",
   // Make all warnings verbose.
   scalacOptions += "-Wconf:any:verbose",
   // Base dependencies.

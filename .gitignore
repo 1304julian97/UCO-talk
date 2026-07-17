@@ -7,6 +7,9 @@
 .project
 .settings/
 .*.md.html
+.idea/
+.vscode/
+tags
 
 # scala/java specific
 *.class
@@ -23,3 +26,14 @@ src_managed/
 project/boot/
 project/plugins/project/
 /bin/
+
+# metals / bloop / bsp
+.metals/
+.bloop/
+.bsp/
+metals.sbt
+project/metals.sbt
+project/project/
+
+# os
+.DS_Store
