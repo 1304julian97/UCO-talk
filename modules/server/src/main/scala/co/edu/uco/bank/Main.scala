@@ -1,7 +1,6 @@
-package co.edu.uco.xebia
+package co.edu.uco.bank
 
-import cats.effect.IOApp
-import cats.effect.IO
+import cats.effect.{IO, IOApp}
 
 object Main extends IOApp.Simple:
   override val run: IO[Unit] =
