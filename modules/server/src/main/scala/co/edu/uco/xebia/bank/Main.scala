@@ -1,4 +1,4 @@
-package co.edu.uco.bank
+package co.edu.uco.xebia.bank
 
 import cats.effect.{IO, IOApp}
 

@@ -1,8 +1,8 @@
-package co.edu.uco.bank.accounts.models
+package co.edu.uco.xebia.bank.accounts.models
 
 import java.time.Instant
 
-import co.edu.uco.bank.shared.{Money, NonEmptyString}
+import co.edu.uco.xebia.bank.shared.{Money, NonEmptyString}
 
 enum AccountStatus:
   case Active
@@ -12,7 +12,7 @@ enum AccountStatus:
 final case class Account(
     id: AccountId,
     owner: CustomerId,
-    name: Option[NonEmptyString],
+    name: AccountName,
     balance: Money,
     status: AccountStatus
 )

@@ -14,4 +14,4 @@ sbt validate    # scalafmt + compile + test
 sbt server/run  # run the app
 ```
 
-Requires JDK 21
+Requires JDK 21 and sbt
