@@ -9,7 +9,6 @@ val catsVersion = "2.13.0"
 val catsEffectVersion = "3.7.0"
 val fs2Version = "3.13.0"
 val http4sVersion = "0.23.34"
-val munitVersion = "1.1.0"
 
 // Common settings
 lazy val commonSettings = Seq(
@@ -31,12 +30,6 @@ lazy val domain =
   project
     .in(file("modules/domain"))
     .settings(commonSettings)
-    .settings(
-      libraryDependencies ++= Seq(
-        "org.scalameta" %% "munit" % munitVersion % Test,
-        "org.scalameta" %% "munit-scalacheck" % munitVersion % Test
-      )
-    )
 
 // Server module
 lazy val server =
