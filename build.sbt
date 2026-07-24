@@ -1,22 +1,22 @@
-// Scala version.
+// Scala version
 ThisBuild / scalaVersion := "3.8.4"
 
 // Organization
 ThisBuild / organization := "co.edu.uco"
 
-// Dependencies versions.
+// Dependencies versions
 val catsVersion = "2.13.0"
 val catsEffectVersion = "3.7.0"
 val fs2Version = "3.13.0"
 val http4sVersion = "0.23.34"
 
-// Common settings.
+// Common settings
 lazy val commonSettings = Seq(
-  // Ensure we publish an artifact linked to the appropriate Java std library.
+  // Ensure we publish an artifact linked to the appropriate Java std library
   scalacOptions += "-java-output-version:21",
-  // Make all warnings verbose.
+  // Make all warnings verbose
   scalacOptions += "-Wconf:any:verbose",
-  // Base dependencies.
+  // Base dependencies
   libraryDependencies ++= Seq(
     "org.typelevel" %% "cats-core" % catsVersion,
     "org.typelevel" %% "cats-effect" % catsEffectVersion,
@@ -25,13 +25,13 @@ lazy val commonSettings = Seq(
   )
 )
 
-// Domain module.
+// Domain module
 lazy val domain =
   project
     .in(file("modules/domain"))
     .settings(commonSettings)
 
-// Server module.
+// Server module
 lazy val server =
   project
     .in(file("modules/server"))
@@ -45,7 +45,7 @@ lazy val server =
       )
     )
 
-// Root module.
+// Root module
 lazy val root =
   project
     .in(file("."))
@@ -54,5 +54,5 @@ lazy val root =
       server
     )
 
-// Format check, compile, and test in one step.
+// Format check, compile, and test in one step
 addCommandAlias("validate", "scalafmtCheckAll; compile; test")
