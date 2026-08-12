@@ -11,4 +11,3 @@ enum PaymentError(message: String) extends RuntimeException(message), NoStackTra
   case CurrencyMismatch(account: AccountId, expected: Currency, actual: Currency)
       extends PaymentError(s"account $account holds $expected, not $actual")
   case SameAccountTransfer(account: AccountId) extends PaymentError(s"cannot transfer to the same account $account")
-  case InvalidAmount(amount: Money) extends PaymentError(s"invalid amount ${amount.amount} ${amount.currency}")

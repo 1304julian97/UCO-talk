@@ -9,6 +9,7 @@ val catsVersion = "2.13.0"
 val catsEffectVersion = "3.7.0"
 val fs2Version = "3.13.0"
 val http4sVersion = "0.23.34"
+val ironVersion = "3.3.2"
 
 // Common settings
 lazy val commonSettings = Seq(
@@ -18,10 +19,10 @@ lazy val commonSettings = Seq(
   scalacOptions += "-Wconf:any:verbose",
   // Base dependencies
   libraryDependencies ++= Seq(
-    "org.typelevel" %% "cats-core" % catsVersion,
+    "org.typelevel" %% "cats-core"   % catsVersion,
     "org.typelevel" %% "cats-effect" % catsEffectVersion,
-    "co.fs2" %% "fs2-core" % fs2Version,
-    "co.fs2" %% "fs2-io" % fs2Version
+    "co.fs2"        %% "fs2-core"    % fs2Version,
+    "co.fs2"        %% "fs2-io"      % fs2Version
   )
 )
 
@@ -30,6 +31,11 @@ lazy val domain =
   project
     .in(file("modules/domain"))
     .settings(commonSettings)
+    .settings(
+      libraryDependencies ++= Seq(
+        "io.github.iltotore" %% "iron" % ironVersion
+      )
+    )
 
 // Server module
 lazy val server =
@@ -40,7 +46,7 @@ lazy val server =
     .settings(
       run / fork := true,
       libraryDependencies ++= Seq(
-        "org.http4s" %% "http4s-server" % http4sVersion,
+        "org.http4s" %% "http4s-server"       % http4sVersion,
         "org.http4s" %% "http4s-ember-server" % http4sVersion
       )
     )
