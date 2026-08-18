@@ -7,6 +7,7 @@ ThisBuild / organization := "co.edu.uco"
 // Dependencies versions
 val catsVersion = "2.13.0"
 val catsEffectVersion = "3.7.0"
+val circeVersion = "0.14.16"
 val fs2Version = "3.13.0"
 val http4sVersion = "0.23.34"
 val ironVersion = "3.3.2"
@@ -33,7 +34,11 @@ lazy val domain =
     .settings(commonSettings)
     .settings(
       libraryDependencies ++= Seq(
-        "io.github.iltotore" %% "iron" % ironVersion
+        "io.circe"           %% "circe-core"          % circeVersion,
+        "org.http4s"         %% "http4s-circe"        % http4sVersion,
+        "org.http4s"         %% "http4s-client"       % http4sVersion,
+        "org.http4s"         %% "http4s-ember-client" % http4sVersion,
+        "io.github.iltotore" %% "iron"                % ironVersion
       )
     )
 
