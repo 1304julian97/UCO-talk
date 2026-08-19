@@ -7,14 +7,15 @@ ThisBuild / organization := "co.edu.uco"
 // Dependencies versions
 val catsVersion = "2.13.0"
 val catsEffectVersion = "3.7.0"
+val circeVersion = "0.14.16"
 val fs2Version = "3.13.0"
 val http4sVersion = "0.23.34"
-val circeVersion = "0.14.10"
+val ironVersion = "3.3.2"
 
 // Common settings
 lazy val commonSettings = Seq(
   // Ensure we publish an artifact linked to the appropriate Java std library
-  scalacOptions += "-java-output-version:21",
+  //scalacOptions += "-java-output-version:21",
   // Make all warnings verbose
   scalacOptions += "-Wconf:any:verbose",
   // Base dependencies
@@ -31,6 +32,15 @@ lazy val domain =
   project
     .in(file("modules/domain"))
     .settings(commonSettings)
+    .settings(
+      libraryDependencies ++= Seq(
+        "io.circe"           %% "circe-core"          % circeVersion,
+        "org.http4s"         %% "http4s-circe"        % http4sVersion,
+        "org.http4s"         %% "http4s-client"       % http4sVersion,
+        "org.http4s"         %% "http4s-ember-client" % http4sVersion,
+        "io.github.iltotore" %% "iron"                % ironVersion
+      )
+    )
 
 // Server module
 lazy val server =

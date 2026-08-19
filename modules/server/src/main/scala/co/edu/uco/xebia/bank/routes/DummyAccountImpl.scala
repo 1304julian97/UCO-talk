@@ -6,7 +6,7 @@ import co.edu.uco.xebia.bank.accounts.algebras.Accounts
 import co.edu.uco.xebia.bank.accounts.models.*
 import co.edu.uco.xebia.bank.accounts.models.AccountStatus.Active
 import co.edu.uco.xebia.bank.shared.Currency.COP
-import co.edu.uco.xebia.bank.shared.{Currency, Money, NonEmptyString}
+import co.edu.uco.xebia.bank.shared.{Currency, Money, MoneyAmount, NonEmptyString}
 
 import java.util.UUID
 
@@ -17,7 +17,13 @@ class DummyAccountImpl extends Accounts {
       .from("My First Car")
       .toOption
       .map(name =>
-        Account(AccountId(UUID.randomUUID()), CustomerId(UUID.randomUUID()), name, Money(BigDecimal(100), COP), Active)
+        Account(
+          AccountId(UUID.randomUUID()),
+          CustomerId(UUID.randomUUID()),
+          name,
+          Money(MoneyAmount(BigDecimal(100)), COP),
+          Active
+        )
       )
   )(new Exception("Account no valid"))
 

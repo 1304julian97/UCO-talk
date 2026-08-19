@@ -23,6 +23,10 @@ object JsonCodecs {
   given Encoder[AccountName] = Encoder[String].contramap(identity)
   given Decoder[AccountName] = Decoder[String].emap(AccountName.from)
 
+  // Refined numeric codecs for opaque types
+  given Encoder[MoneyAmount] = Encoder[BigDecimal].contramap(identity)
+  given Decoder[MoneyAmount] = Decoder[BigDecimal].emap(MoneyAmount.either(_))
+
   // Enum codecs
   given Encoder[Currency] = Encoder[String].contramap(_.toString)
   given Decoder[Currency] = Decoder[String].emap {
