@@ -16,8 +16,8 @@ val ironVersion = "3.3.2"
 lazy val commonSettings = Seq(
   // Ensure we publish an artifact linked to the appropriate Java std library
   //scalacOptions += "-java-output-version:21",
-  // Make all warnings verbose
-  scalacOptions += "-Wconf:any:verbose",
+  // Silence "unused explicit parameter" (E198), and make all other warnings verbose
+  scalacOptions += "-Wconf:any:verbose,id=E198:silent",
   // Base dependencies
   libraryDependencies ++= Seq(
     "org.typelevel" %% "cats-core"   % catsVersion,
