@@ -15,9 +15,10 @@ import co.edu.uco.xebia.bank.routes.{AccountsRoutes, DummyAccountImpl}
 
 object Main extends IOApp.Simple:
 
-  def runServer: IO[Server] =
+  def runServer(accounts: Accounts, payments: Payments): IO[Server] =
     val accountsAlgebra = new DummyAccountImpl()
-    val routes = AccountsRoutes.routes(accountsAlgebra)
+
+    val routes = AccountsRoutes.routes(accounts)
 
     EmberServerBuilder
       .default[IO]
@@ -35,6 +36,7 @@ object Main extends IOApp.Simple:
       converter <- CurrencyConverter.make
       calculator = MoneyCalculator.make(converter)
       accounts = Accounts.make(persistence)
+      accountsDummy = new DummyAccountImpl()
       payments = Payments.make(calculator, persistence)
 
     } yield (accounts, payments)
@@ -85,10 +87,9 @@ object Main extends IOApp.Simple:
 
         _ <- accounts.find(luisAccount.id).flatTap(IO.println)
         _ <- accounts.find(jonathanAccount.id).flatTap(IO.println)
-      } yield ()
-    } >>
-      runServer.flatMap { srv =>
-        IO.println(s"Server started at ${srv.address}") >>
-          IO.never
-      }
+        serve <- runServer(accounts, payments).flatMap(srv =>
+          IO.println(s"Server started at ${srv.address}")
+        ) >> IO.never
+      } yield serve
+    }
   }

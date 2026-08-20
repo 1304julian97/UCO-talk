@@ -36,6 +36,9 @@ object JsonCodecs {
     case other => Left(s"Unknown currency: $other")
   }
 
+  given Encoder[OpenAccountRequest] = deriveEncoder[OpenAccountRequest]
+  given Decoder[OpenAccountRequest] = deriveDecoder[OpenAccountRequest]
+
   // Case class codecs
   given Encoder[Money] = deriveEncoder[Money]
   given Decoder[Money] = deriveDecoder[Money]

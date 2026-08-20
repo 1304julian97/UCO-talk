@@ -1,8 +1,7 @@
 package co.edu.uco.xebia.bank.accounts.models
 
 import java.time.Instant
-
-import co.edu.uco.xebia.bank.shared.{Money, NonEmptyString}
+import co.edu.uco.xebia.bank.shared.{Currency, Money, NonEmptyString}
 
 enum AccountStatus:
   case Active
@@ -16,3 +15,5 @@ final case class Account(
     balance: Money,
     status: AccountStatus
 )
+
+case class OpenAccountRequest(owner: CustomerId, name: AccountName, currency: Currency)
