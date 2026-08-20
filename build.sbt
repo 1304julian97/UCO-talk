@@ -15,9 +15,9 @@ val ironVersion = "3.3.2"
 // Common settings
 lazy val commonSettings = Seq(
   // Ensure we publish an artifact linked to the appropriate Java std library
-  scalacOptions += "-java-output-version:21",
-  // Make all warnings verbose
-  scalacOptions += "-Wconf:any:verbose",
+  //scalacOptions += "-java-output-version:21",
+  // Silence "unused explicit parameter" (E198), and make all other warnings verbose
+  scalacOptions += "-Wconf:any:verbose,id=E198:silent",
   // Base dependencies
   libraryDependencies ++= Seq(
     "org.typelevel" %% "cats-core"   % catsVersion,
@@ -52,7 +52,12 @@ lazy val server =
       run / fork := true,
       libraryDependencies ++= Seq(
         "org.http4s" %% "http4s-server"       % http4sVersion,
-        "org.http4s" %% "http4s-ember-server" % http4sVersion
+        "org.http4s" %% "http4s-ember-server" % http4sVersion,
+        "org.http4s" %% "http4s-dsl"          % http4sVersion,
+        "org.http4s" %% "http4s-circe"        % http4sVersion,
+        "io.circe"   %% "circe-core"          % circeVersion,
+        "io.circe"   %% "circe-generic"       % circeVersion,
+        "io.circe"   %% "circe-parser"        % circeVersion
       )
     )
 
