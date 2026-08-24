@@ -8,7 +8,6 @@ import org.http4s.dsl.io.*
 import org.http4s.circe.CirceEntityCodec.*
 import co.edu.uco.xebia.bank.codecs.JsonCodecs.given
 
-
 object PaymentsRoutes {
 
   private def handlePaymentError(response: IO[Response[IO]]): IO[Response[IO]] =
@@ -26,32 +25,33 @@ object PaymentsRoutes {
         BadRequest(s"Cannot transfer to the same account $account")
     }
 
-  def routes(algebra: Payments):HttpRoutes[IO] = HttpRoutes.of[IO]{
-    case req@POST -> Root / "deposit" => handlePaymentError {
-      for {
-        request <- req.as[DepositRequest]
-        transaction <- algebra.deposit(request.account, request.amount, request.conversion)
-        response <- Ok(transaction)
-      } yield response
-    }
+  def routes(algebra: Payments): HttpRoutes[IO] = HttpRoutes.of[IO] {
+    case req @ POST -> Root / "deposit" =>
+      handlePaymentError {
+        for {
+          request <- req.as[DepositRequest]
+          transaction <- algebra.deposit(request.account, request.amount, request.conversion)
+          response <- Ok(transaction)
+        } yield response
+      }
 
-    case req@POST -> Root / "withdraw" => handlePaymentError {
-      for {
-        request <- req.as[WithdrawRequest]
-        transaction <- algebra.withdraw(request.account, request.amount, request.conversion)
-        response <- Ok(transaction)
-      } yield response
-    }
+    case req @ POST -> Root / "withdraw" =>
+      handlePaymentError {
+        for {
+          request <- req.as[WithdrawRequest]
+          transaction <- algebra.withdraw(request.account, request.amount, request.conversion)
+          response <- Ok(transaction)
+        } yield response
+      }
 
-    case req@POST -> Root / "transfer" => handlePaymentError {
-      for {
-        request <- req.as[TransferRequest]
-        transaction <- algebra.transfer(request.from, request.to, request.amount, request.conversion)
-        response <- Ok(transaction)
-      } yield response
-    }
+    case req @ POST -> Root / "transfer" =>
+      handlePaymentError {
+        for {
+          request <- req.as[TransferRequest]
+          transaction <- algebra.transfer(request.from, request.to, request.amount, request.conversion)
+          response <- Ok(transaction)
+        } yield response
+      }
   }
-
-
 
 }

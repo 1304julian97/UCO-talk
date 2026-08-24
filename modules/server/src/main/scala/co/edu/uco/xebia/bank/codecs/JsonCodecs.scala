@@ -43,12 +43,11 @@ object JsonCodecs {
   }
 
   given Encoder[ConversionPolicy] = Encoder[String].contramap(_.toString)
-  given Decoder[ConversionPolicy] = Decoder[String].emap{
-    case "Reject" => ConversionPolicy.Reject.asRight[String] 
+  given Decoder[ConversionPolicy] = Decoder[String].emap {
+    case "Reject" => ConversionPolicy.Reject.asRight[String]
     case "Convert" => ConversionPolicy.Convert.asRight[String]
     case _ => "Wrong value for ConversionPolicy".asLeft[ConversionPolicy]
   }
-
 
   given Encoder[OpenAccountRequest] = deriveEncoder[OpenAccountRequest]
   given Decoder[OpenAccountRequest] = deriveDecoder[OpenAccountRequest]
