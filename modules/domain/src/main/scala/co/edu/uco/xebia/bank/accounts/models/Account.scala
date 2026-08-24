@@ -17,3 +17,5 @@ final case class Account(
 )
 
 case class OpenAccountRequest(owner: CustomerId, name: AccountName, currency: Currency)
+
+case class FreezeAccountRequest(reason: NonEmptyString)
