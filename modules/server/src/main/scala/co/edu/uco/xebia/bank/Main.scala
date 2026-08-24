@@ -2,6 +2,7 @@ package co.edu.uco.xebia.bank
 
 import cats.effect.IO
 import cats.effect.IOApp
+import cats.syntax.semigroupk.*
 import co.edu.uco.xebia.bank.accounts.algebras.Accounts
 import co.edu.uco.xebia.bank.accounts.models.*
 import co.edu.uco.xebia.bank.payments.algebras.*
@@ -11,14 +12,14 @@ import co.edu.uco.xebia.bank.shared.*
 import com.comcast.ip4s.*
 import org.http4s.ember.server.EmberServerBuilder
 import org.http4s.server.Server
-import co.edu.uco.xebia.bank.routes.{AccountsRoutes, DummyAccountImpl}
+import co.edu.uco.xebia.bank.routes.{AccountsRoutes, DummyAccountImpl, PaymentsRoutes}
 
 object Main extends IOApp.Simple:
 
   def runServer(accounts: Accounts, payments: Payments): IO[Server] =
     val accountsAlgebra = new DummyAccountImpl()
 
-    val routes = AccountsRoutes.routes(accounts)
+    val routes = AccountsRoutes.routes(accounts) <+> PaymentsRoutes.routes(payments)
 
     EmberServerBuilder
       .default[IO]
